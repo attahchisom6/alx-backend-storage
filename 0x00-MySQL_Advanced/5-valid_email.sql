@@ -3,7 +3,7 @@
 
 DELIMITER $$
 CREATE TRIGGER update_email_trigger
-AFTER UPDATE ON users
+BEFORE UPDATE ON users
 FOR EACH ROW
 BEGIN
 	IF OLD.email != NEW.email THEN
