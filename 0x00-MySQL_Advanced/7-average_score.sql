@@ -27,5 +27,5 @@ CREATE PROCEDURE ComputeAverageScoreForUser (
     UPDATE users
     SET average_score = student_avg
     WHERE id = user_id;
-  END $$
-  DELIMITER ;
+END $$
+DELIMITER ;
