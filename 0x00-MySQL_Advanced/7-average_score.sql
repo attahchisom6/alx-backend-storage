@@ -18,7 +18,11 @@ CREATE PROCEDURE ComputeAverageScoreForUser (
     FROM corrections
     WHERE user_id = user_id;
 
-    SET student_avg = total / num_scores;
+    IF num_scores > 0 THEN
+      SET student_avg = total / num_scores;
+    ELSE
+      SET student_avg = 0
+    END IF;
 
     UPDATE users
     SET average_score = student_avg
