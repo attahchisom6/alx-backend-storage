@@ -2,24 +2,26 @@
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
-CREATE PROCEDURE IF NOT EXISTS ComputeAverageScoreForUser (
+CREATE PROCEDURE ComputeAverageScoreForUser (
   IN user_id INTEGER
   )
   BEGIN
     DECLARE total FLOAT;
     DECLARE student_avg FLOAT;
     DECLARE num_scores INT;
-    SELECT INTO total SUM(score)
+
+    SELECT SUM(score) INTO total
     FROM corrections
     WHERE user_id = user_id;
 
-    SELECT INTO num_scores COUNT(*)
+    SELECT COUNT(*) INTO num_scores
     FROM corrections
     WHERE user_id = user_id;
+
+    SET student_avg = total / num_scores;
 
     UPDATE users
-    SET student_avg = total / num_scores
-    SELECT id, name, (average_score as student_avg)
-    WHERE user_id = user_id
+    SET average_score = student_avg
+    WHERE id = user_id;
   END $$
-  DELIMITER $$
+  DELIMITER ;
