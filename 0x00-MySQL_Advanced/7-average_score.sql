@@ -8,7 +8,7 @@ CREATE PROCEDURE ComputeAverageScoreForUser (
   BEGIN
     DECLARE total FLOAT;
     DECLARE student_avg FLOAT;
-    DECLARE num_scores INT;
+    DECLARE num_scores FLOAT;
 
     SELECT SUM(score) INTO total
     FROM corrections
