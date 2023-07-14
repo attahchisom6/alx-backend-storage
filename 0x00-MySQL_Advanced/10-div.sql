@@ -2,14 +2,14 @@
 
 DELIMITER $$
 CREATE FUNCTION SafeDiv(
-  a INT,
-  b INT
+  a INTEGER,
+  b INTEGER
 ) RETURNS FLOAT
 BEGIN
   IF b != 0 THEN
-    RETURN a / b
+    RETURN a / b;
   ELSE
-    RETURN 0
+    RETURN 0;
   END IF;
 END $$
 DELIMITER ;
