@@ -16,9 +16,9 @@ BEGIN
   FROM projects;
 
   IF sum_weights != 0 THEN
-    SET weighted_avg = = weighted_values / sum_weights;
+    SET weighted_avg = weighted_values / sum_weights;
   ELSE
-    SET weighted_value = 0;
+    SET weighted_avg = 0;
   END IF;
 
   UPDATE users
