@@ -4,12 +4,27 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUsers;
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 BEGIN
-  UPDATE users
-  SET average_score = (
-    SELECT SUM(projects.weight * corrections.score) / SUM(projects.weight)
+  DECLARE weighted_values FLOAT;
+  DECLARE sum_weights INTEGER;
+  DECLARE weighted_avg FLOAT;
+
+  SELECT SUM(weight * score) INTO weighted_values
   FROM projects JOIN corrections
-  ON projects.id = corrections.project_id
-  WHERE corrections.user_id = users.id
-);
+  ON projects.id = corrections.project_id;
+
+  SELECT SUM(weight) into sum_weights
+  FROM projects;
+
+  IF sum_weights != 0 THEN
+    SET weighted_avg = = weighted_values / sum_weights;
+  ELSE
+    SET weighted_value = 0;
+  END IF;
+
+  UPDATE users
+  SET average_score = weighted_avg
+  WHERE users.id = (
+    SELECT user_id
+    FROM corrections);
 END $$
 DELIMITER ;
