@@ -1,6 +1,6 @@
 -- script that creates a stored procedure ComputeAverageWeightedScoreForUsers that computes and store the average weighted score for all students.
 
-DELIMETER
+DELIMITER $$
 DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUsers;
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 BEGIN
@@ -16,12 +16,13 @@ BEGIN
   FROM  projects;
 
   IF sum_weights != 0 THEN
-    weighted_avg = weighted_value / sum_weights
+    SET weighted_avg = weighted_value / sum_weights;
   ELSE
-    weigted_avg = 0
+    SET weighted_avg = 0;
   END IF;
 
   UPDATE users
-  SELECT average = weighted_average
+  SET average = weighted_average;
+
 END $$
 DELIMITER ;
