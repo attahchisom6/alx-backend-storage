@@ -15,4 +15,4 @@ def list_all(mongo_collection):
         return documents
     for document in mongo_collection:
         documents.append(document)
-    return documents
+    return documentss
