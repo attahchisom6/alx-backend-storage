@@ -9,10 +9,5 @@ def list_all(mongo_collection):
     function that take a pymongo object and list all document in it else
     an empty list is returned
     """
-    documents = []
-
-    if !mongo_collection:
-        return documents
-    for document in mongo_collection:
-        documents.append(document)
-    return documentss
+    documents=  mongo_collection.find()
+    return [document for in documents]
