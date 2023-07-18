@@ -4,8 +4,9 @@ Python function that inserts a new document in a collection based on
 """
 
 
-insert_school(mongo_collection, **kwargs):
+def insert_school(mongo_collection, **kwargs):
     """
     function returning the id of an inserted document
     """
-    return mongo_collection.insert_one(kwargs).inserted_id
+    document = mongo_collection.insert_one(kwargs)
+    document.inserted_id
