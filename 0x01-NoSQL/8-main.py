@@ -2,13 +2,13 @@
 """
 testing a python function on mongo server
 """
-from pymongo import mongoClient
+from pymongo import MongoClient
 list_all = __import__('8-all').list_all
 
 
 if __name__ == "__main__":
-    client = mongoClient('mongodb://127.0.0.1:27017')
-    schoool_collection = client.db.school
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    schoool_collection = client.db_school
     schools = list_all(school_collection)
 
     for school in schools:
