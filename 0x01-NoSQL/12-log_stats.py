@@ -12,7 +12,7 @@ if __name__ == "__main__":
     client = MongoClient('mongodb://127.0.0.1:27017')
     collection = client.logs.nginx
 
-    total_docs = collection.count_documents({})
+    total_logs = collection.count_documents({})
     print("{:d} logs".format(total_logs))
 
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
