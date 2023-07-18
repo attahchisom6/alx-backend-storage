@@ -12,5 +12,7 @@ def update_topics(mongo_collection, name, topics):
         mongo_collection: pymongo collectiion objects
         name: school name to update
         topic: list of strings of topic stidied in the school
-        """
-        mongo_collection.update_many({"name":name}, {$set: {"topics": topics})
+    """
+    mongo_collection.update_many(
+            {"name":name},
+            {"$set": {"topics": topics})
