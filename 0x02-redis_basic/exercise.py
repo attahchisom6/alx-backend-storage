@@ -4,7 +4,7 @@ module to create a redis  class
 """
 import uuid
 import redis
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 
 
 class Cache:
@@ -20,7 +20,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, Callable[[str], Union[str, bytes, int, float]])
+    def get(self, key: str, fn: Optional[Callable] = None)
     -> [str, bytes, int, float]:
         """
         this method takes a string key and a callable, the callable
