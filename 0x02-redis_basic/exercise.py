@@ -20,24 +20,25 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(key: str, fn: Callable[None]) -> UnionOfTypes:
-        if key is None:
+    def get(self, key: str, Callable[[str], Union[str, bytes, int, float]])
+    -> [str, bytes, int, float]:
+        """
+        this method takes a string key and a callable, the callable
+        take a str as an argument and can return a str, byte, int, float
+        """
+        value = self._redis.get(key)
+        if value is None:
             return None
-        def fn(key: str) -> UnionOfTypes:
-            """
-            return a converted data
-            """
-            return key.converted()
-        return fn(key)
+        return fn(value)
 
-    def get_str(self):
+    def get_str(self, key: str) -> str:
         """
-        parameterize get to str
+        parameterize the return of get to str
         """
-        return str(Cache.get())
+        return self.get(key, str)
 
-    def get_int(self):
+    def get_int(self, key: str) -> int:
         """
-        parameterize the return of get into int
+        parameterize the return of get to int
         """
-        return int(cache.get())
+        return self.get(key, int)
