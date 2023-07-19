@@ -50,8 +50,21 @@ def replay(method: Callable) -> void:
     function to display the history of calls of a particular function.
     """
     history  = call_history(method)
-    for hst in history:
-        print("{} {}".format(hist, hist.key))
+    count = len(history)
+    key = method.__qualname__
+
+    print("Cache.store was called {} times:".format(count))
+
+    input_key = "{}:inputs".format(key)
+    output_key = "{}:outputs".format(key)
+
+    inputs = Cache._redis.lrange(input_key, 0, 1)
+    outputs = Cache._redis.lrange(output_key, 0, 1)
+
+    for num_calls, (ins, outs) in enumerate(zip(inputs, outputs), 1):
+        ins_data = ins.decode()
+        outs_dat =outs.decode()
+        print("{}(*('{}',)) -> {}".format(key, ins_data, outs_data))
 
 
 class Cache:
