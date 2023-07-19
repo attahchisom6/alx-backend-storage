@@ -45,11 +45,12 @@ def call_history(method: Callable) -> Callable:
         return results
     return wrapper
 
+
 def replay(method: Callable) -> void:
     """
     function to display the history of calls of a particular function.
     """
-    history  = call_history(method)
+    history = call_history(method)
     count = len(history)
     key = method.__qualname__
 
@@ -63,7 +64,7 @@ def replay(method: Callable) -> void:
 
     for num_calls, (ins, outs) in enumerate(zip(inputs, outputs), 1):
         ins_data = ins.decode()
-        outs_dat =outs.decode()
+        outs_dat = outs.decode()
         print("{}(*('{}',)) -> {}".format(key, ins_data, outs_data))
 
 
