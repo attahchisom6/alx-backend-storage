@@ -35,4 +35,5 @@ if __name__ == "__main__":
         )
     print("IPs:")
     for ip in ips:
-        print("\t{}: {}".format(ip["_id"], ip["count"]))
+        print("\t{}: {}".format(ip.get("_id"), ip.get("count")))
+
