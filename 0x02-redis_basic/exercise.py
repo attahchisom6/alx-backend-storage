@@ -20,8 +20,8 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, Callable[[str], Union[str, bytes, int, float]])
-    -> [str, bytes, int, float]:
+    def get(self, key: str, fn: Callable[[str], Union[str, bytes, int, float]])
+    -> Union[str, bytes, int, float]:
         """
         this method takes a string key and a callable, the callable
         take a str as an argument and can return a str, byte, int, float
