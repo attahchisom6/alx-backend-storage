@@ -23,6 +23,7 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 class Cache:
     """
     A redis class aimed for caching
