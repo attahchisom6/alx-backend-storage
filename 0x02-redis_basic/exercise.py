@@ -46,7 +46,7 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
-def replay(method: Callable) -> void:
+def replay(method: Callable) -> None:
     """
     function to display the history of calls of a particular function.
     """
