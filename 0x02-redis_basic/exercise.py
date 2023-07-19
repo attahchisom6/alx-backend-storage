@@ -27,9 +27,9 @@ class Cache:
         take a str as an argument and can return a str, byte, int, float
         """
         value = self._redis.get(key)
-        if value is None:
-            return None
-        return fn(value)
+        if fn:
+            return fn(value)
+        return value
 
     def get_str(self, key: str) -> str:
         """
