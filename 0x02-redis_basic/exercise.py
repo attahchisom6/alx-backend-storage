@@ -4,6 +4,7 @@ module to create a redis  class
 """
 import uuid
 import redis
+from functools import wraps
 from typing import Union, Callable, Optional
 
 
@@ -23,23 +24,25 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
     """
-    decorator to store the history of inputs and outputs for a particular function (Callable
+    decorator to store the history of inputs and outputs for a
+    particular function (Callable
     """
-    inputs = []
-    outphts = []
-    input_key = ":inputs"
-    output_key = ":outputs"
+    key = method.__qualname__
+    input_key = "{}:inputs".format(key)
+    output_key = "{}:outputs".format(key)
 
     @wraps(method)
     @wrapper(self, *args):
         """
         wrapper to return a function
         """
-        self._redis.rpush inputs str(args)
-        results = method(self, *args)
-        return self._redis.rpush outputs result
+        self._redis.rpush(input_key, str(args))
+        results = str(method(self, *args))
+        self._redis.rpush(output_key, results)
+        return results
     return wrapper
 
 
@@ -51,7 +54,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    @history_calls
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         key = str(uuid.uuid4())
