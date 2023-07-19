@@ -4,7 +4,6 @@ module to create a redis  class
 """
 import uuid
 import redis
-from functools import wraps
 from typing import Union, Callable, Optional
 
 
