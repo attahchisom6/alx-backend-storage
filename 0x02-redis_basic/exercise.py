@@ -12,7 +12,6 @@ class Cache:
     A redis class aimed for caching
     """
     def __init__(self):
-        """init"""
         self._redis = redis.Redis()
         self._redis.flushdb()
 
