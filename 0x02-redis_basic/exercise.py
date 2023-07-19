@@ -35,7 +35,7 @@ def call_history(method: Callable) -> Callable:
     output_key = "{}:outputs".format(key)
 
     @wraps(method)
-    @wrapper(self, *args):
+    def wrapper(self, *args):
         """
         wrapper to return a function
         """
