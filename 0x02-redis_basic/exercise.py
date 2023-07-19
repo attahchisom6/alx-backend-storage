@@ -7,6 +7,22 @@ import redis
 from typing import Union, Callable, Optional
 
 
+def count_calls(method: Callable) -> Callable:
+    """
+    count how many timea the cache class is called and returns a callable
+    """
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """
+        function that increments the count for the key every time the method is
+        called and returns the value returned by the original method.
+        """
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
+    return wrapper
+
 class Cache:
     """
     A redis class aimed for caching
