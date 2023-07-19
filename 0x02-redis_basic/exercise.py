@@ -45,6 +45,14 @@ def call_history(method: Callable) -> Callable:
         return results
     return wrapper
 
+def replay(method: Callable) -> void:
+    """
+    function to display the history of calls of a particular function.
+    """
+    history  = call_history(method)
+    for hst in history:
+        print("{} {}".format(hist, hist.key))
+
 
 class Cache:
     """
