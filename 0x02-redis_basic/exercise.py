@@ -65,7 +65,7 @@ def replay(method: Callable) -> None:
     for ins, outs in zip(inputs, outputs):
         ins_data = ins.decode("utf-8")
         outs_data = outs.decode("utf-8")
-        print("{}(*({},)) -> {}".format(key, ins_data, outs_data))
+        print("{}(*({}) -> {}".format(key, ins_data, outs_data))
 
 
 class Cache:
