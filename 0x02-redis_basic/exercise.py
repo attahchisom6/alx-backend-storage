@@ -50,7 +50,7 @@ def replay(method: Callable) -> None:
     """
     function to display the history of calls of a particular function.
     """
-    redit = method.self._redis
+    redit = method.__self__._redis
     key = method.__qualname__
     count = redit.get(key).decode("utf-8")
 
