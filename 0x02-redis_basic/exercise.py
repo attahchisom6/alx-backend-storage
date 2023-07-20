@@ -61,8 +61,9 @@ def replay(method: Callable) -> None:
 
     inputs = redis.lrange(input_key, 0, -1)
     outputs = redis.lrange(output_key, 0, -1)
+    Tuple = zip(inputs, outputs)
 
-    for ins, outs in list(zip(inputs, outputs)):
+    for ins, outs in list(Tuple):
         ins_data = ins.decode("utf-8")
         outs_data = outs.decode("utf-8")
         print("{}(*{}) -> {}".format(key, ins_data, outs_data))
