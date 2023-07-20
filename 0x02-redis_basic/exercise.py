@@ -50,7 +50,6 @@ def replay(method: Callable) -> None:
     """
     function to display the history of calls of a particular function.
     """
-    history = call_history(method)
     key = method.__qualname__
     count = Cache.get(key)
 
