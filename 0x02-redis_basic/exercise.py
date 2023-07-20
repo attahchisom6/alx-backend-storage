@@ -59,8 +59,8 @@ def replay(method: Callable) -> None:
     input_key = "{}:inputs".format(key)
     output_key = "{}:outputs".format(key)
 
-    inputs = redis.lrange(input_key, 0, 1)
-    outputs = redis.lrange(output_key, 0, 1)
+    inputs = redis.lrange(input_key, 0, -1)
+    outputs = redis.lrange(output_key, 0, -1)
 
     for ins, outs in zip(inputs, outputs):
         ins_data = ins.decode("utf-8"))
