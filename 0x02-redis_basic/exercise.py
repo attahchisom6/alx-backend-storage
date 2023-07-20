@@ -50,20 +50,21 @@ def replay(method: Callable) -> None:
     """
     function to display the history of calls of a particular function.
     """
+    redis = redis.Redis()
     key = method.__qualname__
-    count = Cache.get(key)
+    count = redis.get(key).decode("utf-8")
 
     print("Cache.store was called {} times:".format(count))
 
     input_key = "{}:inputs".format(key)
     output_key = "{}:outputs".format(key)
 
-    inputs = Cache._redis.lrange(input_key, 0, 1)
-    outputs = Cache._redis.lrange(output_key, 0, 1)
+    inputs = redis.lrange(input_key, 0, 1)
+    outputs = redis.lrange(output_key, 0, 1)
 
-    for num_calls, (ins, outs) in enumerate(zip(inputs, outputs), 1):
-        ins_data = ins.decode()
-        outs_data = outs.decode()
+    for ins, outs in zip(inputs, outputs):
+        ins_data = ins.decode("utf-8"))
+        outs_data = outs.decode("utf-8")
         print("{}(*('{}',)) -> {}".format(key, ins_data, outs_data))
 
 
