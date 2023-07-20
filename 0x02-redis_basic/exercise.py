@@ -52,7 +52,7 @@ def replay(method: Callable) -> None:
     """
     redit = redis.Redis()
     key = method.__qualname__
-    count = redis.get(key).decode("utf-8")
+    count = redit.get(key).decode("utf-8")
 
     print("{} was called {} times:".format(key, count))
 
