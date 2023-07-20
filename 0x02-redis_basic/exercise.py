@@ -51,8 +51,8 @@ def replay(method: Callable) -> None:
     function to display the history of calls of a particular function.
     """
     history = call_history(method)
-    count = len(history)
     key = method.__qualname__
+    count = Cache.get(key)
 
     print("Cache.store was called {} times:".format(count))
 
