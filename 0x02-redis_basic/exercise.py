@@ -56,8 +56,8 @@ def replay(method: Callable) -> None:
 
     print("{} was called {} times:".format(key, count))
 
-    input_key = "{}:inputs".format(key)
-    output_key = "{}:outputs".format(key)
+    input_key = key + ":inputs"
+    output_key = key + ":outputs"
 
     inputs = redit.lrange(input_key, 0, -1)
     outputs = redit.lrange(output_key, 0, -1)
