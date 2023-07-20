@@ -51,7 +51,7 @@ def replay(method: Callable) -> None:
     function to display the history of calls of a particular function.
     """
     key = method.__qualname__
-    redit = redis.Redit()
+    redit = redis.Redis()
     count = redit.get(key).decode("utf-8")
     print("{} was called {} times:".format(key, count))
 
@@ -61,7 +61,7 @@ def replay(method: Callable) -> None:
 
     inputs = redit.lrange(input_key, 0, -1)
     outputs = redit.lrange(output_key, 0, -1)
-    Tuple = zip(inputs, output)
+    Tuple = zip(inputs, outputs)
 
     for ins, outs in list(Tuple):
         ins_data = ins.decode()
