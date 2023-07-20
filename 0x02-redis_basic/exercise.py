@@ -62,7 +62,7 @@ def replay(method: Callable) -> None:
     inputs = redit.lrange(input_key, 0, -1)
     outputs = redit.lrange(output_key, 0, -1)
 
-    for ins, outs in zip(inputs, outputs):
+    for ins, outs in list(zip(inputs, outputs)):
         ins_data = ins.decode("utf-8")
         outs_data = outs.decode("utf-8")
         print("{}(*({}) -> {}".format(key, ins_data, outs_data))
