@@ -54,7 +54,7 @@ def replay(method: Callable) -> None:
     key = method.__qualname__
     count = redit.get(key).decode("utf-8")
 
-    print("Cache.store was called {} times:".format(count))
+    print("{} was called {} times:".format(key, count))
 
     input_key = "{}:inputs".format(key)
     output_key = "{}:outputs".format(key)
